@@ -16,7 +16,7 @@ FROM nginx:alpine AS production
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
-RUN chmod -R g+w /var/cache/nginx /var/run /var/log/nginx
+RUN chmod -R 777 /var/cache/nginx /var/run /var/log/nginx
 
 EXPOSE 8080
 
