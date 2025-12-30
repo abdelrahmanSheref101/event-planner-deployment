@@ -1,0 +1,16 @@
+name: Keep OpenShift App Alive
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'   # runs every 10 minutes
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping OpenShift public route
+        run: |
+          curl -L --retry 3 --retry-delay 5 --max-time 60 \
+          https://frontend-abdelrahman-sheref-4-dev.apps.rm3.7wse.p1.openshiftapps.com/login || echo "Ping failed (ok)"
+
